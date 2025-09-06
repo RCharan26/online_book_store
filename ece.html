@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ECE Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-center text-danger mb-4">ECE Books</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped text-center shadow">
+        <thead class="table-dark">
+          <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Price ($)</th>
+            <th>Add to Cart</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Electronic Devices</td>
+            <td>Boylestad</td>
+            <td>30</td>
+            <td><button class="btn btn-success btn-sm" onclick="addToCart('Electronic Devices', 30)">Add</button></td>
+          </tr>
+          <tr>
+            <td>Signals and Systems</td>
+            <td>Alan V. Oppenheim</td>
+            <td>45</td>
+            <td><button class="btn btn-success btn-sm" onclick="addToCart('Signals and Systems', 45)">Add</button></td>
+          </tr>
+          <tr>
+            <td>Digital Signal Processing</td>
+            <td>Proakis</td>
+            <td>38</td>
+            <td><button class="btn btn-success btn-sm" onclick="addToCart('Digital Signal Processing', 38)">Add</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let item = cart.find(b => b.name === name);
+      if (item) item.quantity += 1;
+      else cart.push({ name, price, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+  </script>
+</body>
+</html>

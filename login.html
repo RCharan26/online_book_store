@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page Validation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <script>
+    // Validate email
+    function emailValidation(email) {
+      let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    // Validate password
+    function passwordValidation(password) {
+      return password.length >= 6; // minimum 6 characters
+    }
+
+    // Master validation on submit
+    function validateLogin(e) {
+      let email = document.loginForm.email.value.trim();
+      let password = document.loginForm.password.value;
+
+      if (!emailValidation(email)) {
+        alert("Please enter a valid email address.");
+        e.preventDefault();
+        return false;
+      }
+
+      if (!passwordValidation(password)) {
+        alert("Password must be at least 6 characters long.");
+        e.preventDefault();
+        return false;
+      }
+
+      alert("Login Successful ✅");
+      return true;
+    }
+  </script>
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card shadow-lg p-4 rounded-4">
+          <h2 class="text-center text-primary mb-4">Login</h2>
+
+          <form name="loginForm" onsubmit="return validateLogin(event)" method="post">
+
+            <div class="mb-3">
+              <label class="form-label">Email ID</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success w-50 me-2">Login</button>
+              <button type="reset" class="btn btn-danger w-50">Reset</button>
+            </div>
+
+          </form>
+
+          <div class="text-center mt-3">
+            <p>Don’t have an account? <a href="registration.html" class="text-decoration-none">Register here</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
